@@ -66,4 +66,4 @@ app.get("/delete", async (req, res) => {
   res.redirect("/toy");
 });
 const PORT = process.env.PORT || 1209;
-var server = app.listen(PORT, function () {});
+app.listen(PORT, function () {});
