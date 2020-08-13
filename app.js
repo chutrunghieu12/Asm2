@@ -47,6 +47,17 @@ app.get("/insert", (req, res) => {
 });
 app.post("/doInsert", async (req, res) => {
   let inputName = req.body.txtName;
+  if (inputName.length < 1) {
+    let errorModel = {
+      nameError: "Ten phai lon hon 1 ky tu",
+    };
+    res.render("insert", { model: errorModel });
+  } else {
+    let data = inputName;
+    fs.appendFile(fileName, data, function (err) {
+      res.redirect("/toy");
+    });
+  }
   let inputPrice = req.body.txtPrice;
   let inputImage = req.body.Image;
   let newToy = { name: inputName, price: inputPrice, image: inputImage };
