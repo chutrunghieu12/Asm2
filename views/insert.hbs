@@ -16,6 +16,7 @@
         <form action="/doInsert" method="post">
             Name <input type="text" style="width : 500px;height:30px;font-size : 15px" name="txtName"
                 placeholder="Name of product" id="">
+            <label id="lblNameError" style="color:red">{{model.nameError}}</label>
             <br>
             <br>
             Price <input type="text" style="width : 500px;height:30px;font-size : 15px" name="txtPrice"
