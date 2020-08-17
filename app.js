@@ -41,11 +41,14 @@ app.post("/doSearch", async (req, res) => {
     };
     res.render("index1", { model: errorModel });
   } else {
+    let data = inputName;
+    fs.appendFile(txtName, data, function (err) {
     let results = await dbo
       .collection("Toy")
       .find({ name: { $regex: new RegExp(inputName, "^" + "i") } })
       .toArray();
     res.render("index1", { model: results });
+    });
   }
 });
 
