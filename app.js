@@ -45,7 +45,7 @@ app.post("/doSearch", async (req, res) => {
     fs.appendFile(txtName, data, function (err) {
     let results = await dbo
       .collection("Toy")
-      .find({ name: { $regex: new RegExp(inputName, "^" + "i") } })
+      .find({ name: { $regex: new RegExp(inputName, "i") } })
       .toArray();
     res.render("index1", { model: results });
     });
