@@ -33,13 +33,20 @@ app.get("/toy", async function (req, res) {
 //user submit form
 app.post("/doSearch", async (req, res) => {
   let inputName = req.body.txtName;
-  let client = await MongoClient.connect(url);
-  let dbo = client.db("ToyDB");
-  let results = await dbo
-    .collection("Toy")
-    .find({ name: { $regex: new RegExp(inputName, "i") } })
-    .toArray();
-  res.render("index1", { model: results });
+  if (inputName.length < 1) {
+    let errorModel = {
+      nameError: "Data entry must be greater than 1 character",
+    };
+    res.render("index1", { model: errorModel });
+  } else {
+    let client = await MongoClient.connect(url);
+    let dbo = client.db("ToyDB");
+    let results = await dbo
+      .collection("Toy")
+      .find({ name: { $regex: new RegExp(inputName, "^" + "i") } })
+      .toArray();
+    res.render("index1", { model: results });
+  }
 });
 
 app.get("/insert", (req, res) => {
@@ -47,17 +54,6 @@ app.get("/insert", (req, res) => {
 });
 app.post("/doInsert", async (req, res) => {
   let inputName = req.body.txtName;
-  if (inputName.length < 1) {
-    let errorModel = {
-      nameError: "Ten phai lon hon 1 ky tu",
-    };
-    res.render("insert", { model: errorModel });
-  } else {
-    let data = inputName;
-    fs.appendFile(fileName, data, function (err) {
-      res.redirect("/toy");
-    });
-  }
   let inputPrice = req.body.txtPrice;
   let inputImage = req.body.Image;
   let newToy = { name: inputName, price: inputPrice, image: inputImage };
@@ -77,4 +73,4 @@ app.get("/delete", async (req, res) => {
   res.redirect("/toy");
 });
 const PORT = process.env.PORT || 1209;
-app.listen(PORT, function () {});
+var server = app.listen(PORT, function () {});

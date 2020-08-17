@@ -10,27 +10,36 @@
 
 <body style="background-image:url(https://i.ytimg.com/vi/oc14erp5wr8/maxresdefault.jpg)">
     <center>
-        <h1>
-            <a style="color:red">ADD TOY</a>
-        </h1>
-        <form action="/doInsert" method="post">
-            Name <input type="text" style="width : 500px;height:30px;font-size : 15px" name="txtName"
-                placeholder="Name of product" id="">
-            <label id="lblNameError" style="color:red">{{model.nameError}}</label>
-            <br>
-            <br>
-            Price <input type="text" style="width : 500px;height:30px;font-size : 15px" name="txtPrice"
-                placeholder="Price" id="">
-            <br>
-            <br>
-            Image <input type="text" style="width : 500px;height:30px;font-size : 15px" name="Image" placeholder="URL"
-                id="">
-            <br>
-            <br>
-            <input type="submit" style="height:30px;font-size : 20px" value="Add">
-            <br>
-        </form>
+        <div
+            style="border : 2px solid black ; padding : 10px ; weight : 60px ; width : 800px ;background-color : orange ">
+
+            <h1>
+                <a style="color : green">ADD TOY</a>
+            </h1>
+            <form action="/doInsert" method="post">
+                Name <input type="text" style="width : 500px;height:30px;font-size : 15px" name="txtName"
+                    placeholder="Name of product" id="">
+                <br>
+                <br>
+                <br>
+                Price <input type="text" style="width : 500px;height:30px;font-size : 15px" name="txtPrice"
+                    placeholder="Price" id="">
+                <br>
+                <br>
+                <br>
+                Image <input type="text" style="width : 500px;height:30px;font-size : 15px" name="Image"
+                    placeholder="URL" id="">
+                <br>
+                <br>
+                <br>
+                <input type="submit" style="height:30px;font-size : 20px" value="Add">
+                <br>
+                <a style="height:30px;font-size : 20px ; margin-left : 700px" href="/"> Back </a>
+                <br>
+            </form>
+        </div>
     </center>
+
 </body>
 
 </html>
