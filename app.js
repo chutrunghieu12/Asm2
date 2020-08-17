@@ -33,14 +33,14 @@ app.get("/toy", async function (req, res) {
 //user submit form
 app.post("/doSearch", async (req, res) => {
   let inputName = req.body.txtName;
+  let client = await MongoClient.connect(url);
+  let dbo = client.db("ToyDB");
   if (inputName.length < 1) {
     let errorModel = {
       nameError: "Data entry must be greater than 1 character",
     };
     res.render("index1", { model: errorModel });
   } else {
-    let client = await MongoClient.connect(url);
-    let dbo = client.db("ToyDB");
     let results = await dbo
       .collection("Toy")
       .find({ name: { $regex: new RegExp(inputName, "^" + "i") } })
