@@ -35,21 +35,11 @@ app.post("/doSearch", async (req, res) => {
   let inputName = req.body.txtName;
   let client = await MongoClient.connect(url);
   let dbo = client.db("ToyDB");
-  if (inputName.length < 1) {
-    let errorModel = {
-      nameError: "Data entry must be greater than 1 character",
-    };
-    res.render("index1", { model: errorModel });
-  } else {
-    let data = inputName;
-    fs.appendFile(data, function (err) {
-    let results = await dbo
-      .collection("Toy")
-      .find({ name: { $regex: new RegExp(inputName, "i") } })
-      .toArray();
-    res.render("index1", { model: results });
-    });
-  }
+  let results = await dbo
+    .collection("Toy")
+    .find({ name: { $regex: new RegExp(inputName, "i") } })
+    .toArray();
+  res.render("index1", { model: results });
 });
 
 app.get("/insert", (req, res) => {
