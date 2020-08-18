@@ -53,8 +53,15 @@ app.post("/doInsert", async (req, res) => {
 
   let client = await MongoClient.connect(url);
   let dbo = client.db("ToyDB");
-  await dbo.collection("Toy").insertOne(newToy);
-  res.redirect("/toy");
+  if (isNaN(inputPrice)) {
+    let errorModel = {
+      priceError: "Must be a number",
+    };
+    res.render("insert", { model: errorModel });
+  } else {
+    await dbo.collection("Toy").insertOne(newToy);
+    res.redirect("/toy");
+  }
 });
 app.get("/delete", async (req, res) => {
   let inputId = req.query.id;
