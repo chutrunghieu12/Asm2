@@ -38,7 +38,7 @@ app.post("/doSearch", async (req, res) => {
   let results = await dbo
     .collection("Toy")
     .find({
-      $or: [{ name: new RegExp(search, "i") }, { price: { $lt: 5000 } }],
+      name: new RegExp(search, "i"),
     })
     .toArray();
   res.render("index1", { model: results });
