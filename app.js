@@ -41,16 +41,6 @@ app.post("/doSearch", async (req, res) => {
     .toArray();
   res.render("index1", { model: results });
 });
-app.post("/doDemo", async (req, res) => {
-  let inputPrice = req.body.txtPrice;
-  let client = await MongoClient.connect(url);
-  let dbo = client.db("ToyDB");
-  let results = await dbo
-    .collection("Toy")
-    .find({ price: { $lt: 5000 } })
-    .toArray();
-  res.render("index1", { model: results });
-});
 
 app.get("/insert", (req, res) => {
   res.render("insert");
