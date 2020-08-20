@@ -42,7 +42,7 @@ app.post("/doSearch", async (req, res) => {
   res.render("index1", { model: results });
 });
 app.post("/doDemo", async (req, res) => {
-  //let inputPrice = req.body.txtPrice;
+  let inputPrice = req.body.txtPrice;
   let client = await MongoClient.connect(url);
   let dbo = client.db("ToyDB");
   let results = await dbo
